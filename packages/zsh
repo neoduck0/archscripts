@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ $(basename $SHELL) != zsh ]; then
+    sudo usermod -s "$(which zsh)" "$(whoami)"
+fi
+
+if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+theme_file=~/.oh-my-zsh/custom/themes/my_theme.zsh-theme
+if [ ! -f $theme_file ]; then
+    echo 'PROMPT="%b%F{green}%3~ \$(hg_prompt_info)\$(git_prompt_info)%B%(!.%F{red}.%F{blue})»%f%b "
+    RPS1="%(?..%F{red}%?%f)"
+
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
+    ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
+
+    ZSH_THEME_HG_PROMPT_PREFIX="%{$fg[magenta]%}hg:‹%{$fg[yellow]%}"
+    ZSH_THEME_HG_PROMPT_SUFFIX="%{$fg[magenta]%}› %{$reset_color%}"
+    ZSH_THEME_HG_PROMPT_DIRTY=" %{$fg[red]%}✗"
+    ZSH_THEME_HG_PROMPT_CLEAN=""
+    ' > "$theme_file"
+fi

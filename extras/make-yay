@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+(
+    build_dir=$(mktemp -d)
+    cd $build_dir
+
+    trap "cd; rm -rf '$build_dir'" EXIT
+
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+)

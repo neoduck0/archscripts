@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+while true; do
+    read -p "Key Comment (or Email): " comment
+
+    if [ -n "$comment" ]; then
+        break
+    fi
+done
+
+ssh-keygen -t ed25519 -C "$comment" -f ~/.ssh/id_ed25519

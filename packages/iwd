@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo systemctl enable iwd
+
+if [ ! -d /etc/iwd ]; then
+    sudo mkdir /etc/iwd
+fi
+
+echo "[General]
+EnableNetworkConfiguration=true" | sudo tee /etc/iwd/main.conf &> /dev/null
