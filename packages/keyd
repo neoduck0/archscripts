@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo systemctl enable keyd
+
+sudo usermod -aG keyd $(whoami)
+
+if [ ! -d /etc/keyd ]; then
+    sudo mkdir /etc/keyd
+fi
+
+echo "[ids]
+*
+
+[main]
+capslock = overload(control, esc)
+leftcontrol = capslock
+
+[meta+shift]
+h = left
+j = down
+k = up
+l = right" | sudo tee /etc/keyd/default.conf &> /dev/null

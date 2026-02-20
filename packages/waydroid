@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sudo systemctl enable waydroid-container.service
+
+if [ pacman -Q ufw ]; then
+    sudo ufw allow 67
+    sudo ufw allow 53
+    sudo ufw default allow FORWARD
+fi

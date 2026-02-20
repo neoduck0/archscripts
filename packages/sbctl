@@ -1,0 +1,6 @@
+#!/usr/bin
+
+sudo sbctl create-keys
+sudo sbctl enroll-keys -m
+sudo sbctl verify
+sudo sbctl sign-all
