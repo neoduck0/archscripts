@@ -7,3 +7,5 @@ sudo usermod -aG libvirt $(whoami)
 if pacman -Q ufw &> /dev/null; then
     echo 'firewall_backend = "iptables"' | sudo tee /etc/libvirt/network.conf &> /dev/null
 fi
+
+sudo virsh net-autostart default
