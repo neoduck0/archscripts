@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+new_amount=5
+sudo sed -i "s|# deny = 3|deny = $new_amount|" /mnt/etc/security/faillock.conf
